@@ -1,0 +1,46 @@
+---
+title: Button
+description: Componente de acción principal. Soporta 6 variantes, 3 tamaños y renderizado como elemento arbitrario vía asChild.
+---
+
+import ButtonExamples from "../../../examples/ButtonExamples";
+
+## Importación
+
+```tsx
+import { Button } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<ButtonExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `variant` | `"primary" \| "secondary" \| "outline" \| "ghost" \| "dark" \| "link"` | `"primary"` | Estilo visual del botón |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Tamaño del botón |
+| `asChild` | `boolean` | `false` | Delega el render al hijo (útil con `<Link>`) |
+| `disabled` | `boolean` | `false` | Deshabilita la interacción |
+| `className` | `string` | — | Clases CSS adicionales |
+| ...resto | `ButtonHTMLAttributes` | — | Todos los atributos nativos de `<button>` |
+
+## Uso con Link (Next.js / React Router)
+
+```tsx
+import { Button } from "@dubalu-dev/design-system";
+import Link from "next/link";
+
+<Button asChild>
+  <Link href="/dashboard">Ir al dashboard</Link>
+</Button>
+```
+
+## Uso con onClick
+
+```tsx
+<Button variant="outline" size="sm" onClick={() => console.log("click")}>
+  Acción secundaria
+</Button>
+```
