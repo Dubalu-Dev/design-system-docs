@@ -1,0 +1,63 @@
+---
+title: Avatar
+description: Imagen de perfil circular con fallback automático a iniciales. Soporta tamaño, ring de estado activo y stack de avatares.
+---
+
+import AvatarExamples from "../../../examples/AvatarExamples";
+
+## Importación
+
+```tsx
+import { Avatar } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<AvatarExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `alt` | `string` | — | **Requerido.** Texto alternativo y fuente de las iniciales |
+| `src` | `string` | — | URL de la imagen. Si falla o no se provee, muestra iniciales |
+| `size` | `number` | `48` | Tamaño en px del contenedor |
+| `ring` | `boolean` | `false` | Añade ring de color primario (usuario activo / seleccionado) |
+| `className` | `string` | — | Clases adicionales |
+
+## Fallback de iniciales
+
+El fallback extrae hasta 2 palabras del `alt` y usa su primera letra en mayúscula.
+
+```
+alt="María López"  →  "ML"
+alt="Juan"         →  "J"
+alt="Ana M. Torres" →  "AM"
+```
+
+## Patrón: usuario en header
+
+```tsx
+import { Avatar } from "@dubalu-dev/design-system";
+
+function UserMenu({ user }: { user: { name: string; avatarUrl?: string } }) {
+  return (
+    <button type="button" className="flex items-center gap-2">
+      <Avatar src={user.avatarUrl} alt={user.name} size={32} />
+      <span className="text-sm">{user.name}</span>
+    </button>
+  );
+}
+```
+
+## Patrón: stack de avatares
+
+```tsx
+<div className="flex -space-x-3">
+  {members.map((m) => (
+    <div key={m.id} className="ring-2 ring-white rounded-full">
+      <Avatar src={m.avatarUrl} alt={m.name} size={36} />
+    </div>
+  ))}
+</div>
+```

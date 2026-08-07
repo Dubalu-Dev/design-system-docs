@@ -1,0 +1,68 @@
+---
+title: SectionHeading
+description: Encabezado de sección con borde de acento de color, eyebrow, subtitle y slot de acción. Polimórfico (as prop).
+---
+
+import SectionHeadingExamples from "../../../examples/SectionHeadingExamples";
+
+## Importación
+
+```tsx
+import { SectionHeading } from "@dubalu-dev/design-system";
+import type { SectionHeadingAccent, SectionHeadingAlign } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<SectionHeadingExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `children` | `ReactNode` | — | **Requerido.** Texto principal del encabezado |
+| `accent` | `"primary" \| "secondary" \| "tertiary"` | `"primary"` | Color del borde izquierdo |
+| `eyebrow` | `ReactNode` | — | Texto pequeño encima del heading |
+| `subtitle` | `ReactNode` | — | Texto descriptivo debajo del heading |
+| `action` | `ReactNode` | — | Elemento a la derecha (botón, link, etc.) |
+| `align` | `"left" \| "center" \| "right"` | `"left"` | Alineación del bloque de texto |
+| `as` | `ElementType` | `"h2"` | Elemento semántico del encabezado |
+| `className` | `string` | — | Clases adicionales |
+
+## Patrón: sección con acción
+
+```tsx
+import { SectionHeading, Button } from "@dubalu-dev/design-system";
+
+function InfluencersSection() {
+  return (
+    <>
+      <SectionHeading
+        eyebrow="Agosto 2026"
+        subtitle="Ordenados por engagement promedio."
+        action={<Button size="sm" variant="outline">Exportar CSV</Button>}
+      >
+        Influencers destacados
+      </SectionHeading>
+      {/* tabla de influencers */}
+    </>
+  );
+}
+```
+
+## Patrón: landing page centrada
+
+```tsx
+<SectionHeading
+  align="center"
+  as="h1"
+  eyebrow="Plataforma de marketing"
+  subtitle="Conecta marcas con los mejores influencers de México."
+>
+  Todo lo que necesitas
+</SectionHeading>
+```
+
+:::tip
+Usa `as="h1"` solo una vez por página. Para secciones dentro de una misma vista, el default `as="h2"` es correcto. Si anidas secciones, usa `as="h3"`.
+:::

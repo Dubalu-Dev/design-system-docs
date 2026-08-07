@@ -1,0 +1,74 @@
+---
+title: Pagination
+description: Navegación entre páginas con compresión automática de ellipsis. Completamente controlado y accesible.
+---
+
+import PaginationExamples from "../../../examples/PaginationExamples";
+
+## Importación
+
+```tsx
+import { Pagination } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<PaginationExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `currentPage` | `number` | — | **Requerido.** Página activa |
+| `totalPages` | `number` | — | **Requerido.** Número total de páginas |
+| `onPageChange` | `(page: number) => void` | — | **Requerido.** Callback al cambiar página |
+| `siblingCount` | `number` | `1` | Páginas visibles a cada lado de la actual |
+| `navigationLabel` | `string` | `"Paginación"` | `aria-label` del `<nav>` |
+| `prevLabel` | `string` | `"Página anterior"` | `aria-label` del botón anterior |
+| `nextLabel` | `string` | `"Página siguiente"` | `aria-label` del botón siguiente |
+| `pageLabel` | `(page: number) => string` | — | `aria-label` personalizado por página |
+| `className` | `string` | — | Clases adicionales |
+
+Si `totalPages <= 1`, el componente retorna `null` y no ocupa espacio.
+
+## Algoritmo de ellipsis
+
+Con `siblingCount=1` y 20 páginas, en la página 7:
+
+```
+« 1 … 5 6 [7] 8 9 … 20 »
+```
+
+Con `siblingCount=2`:
+
+```
+« 1 … 4 5 6 [7] 8 9 10 … 20 »
+```
+
+## Patrón: tabla paginada con React Query
+
+```tsx
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Pagination } from "@dubalu-dev/design-system";
+
+function PaginatedTable() {
+  const [page, setPage] = useState(1);
+
+  const { data } = useQuery({
+    queryKey: ["items", page],
+    queryFn: () => fetchItems({ page, limit: 20 }),
+  });
+
+  return (
+    <>
+      {/* tabla de resultados */}
+      <Pagination
+        currentPage={page}
+        totalPages={data?.totalPages ?? 1}
+        onPageChange={setPage}
+      />
+    </>
+  );
+}
+```

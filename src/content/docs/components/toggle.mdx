@@ -1,0 +1,76 @@
+---
+title: Toggle / ToggleGroup
+description: Botón biestado (on/off) y grupo de toggles con variantes segmented, pills y group. Soporta selección única y múltiple.
+---
+
+import ToggleExamples from "../../../examples/ToggleExamples";
+
+## Importación
+
+```tsx
+import { Toggle } from "@dubalu-dev/design-system";
+import { ToggleGroup, ToggleGroupItem } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<ToggleExamples client:only="react" />
+
+## Toggle — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `pressed` | `boolean` | — | Estado controlado |
+| `defaultPressed` | `boolean` | `false` | Estado inicial no controlado |
+| `onPressedChange` | `(pressed: boolean) => void` | — | Callback |
+| `variant` | `"default" \| "outline"` | `"default"` | Estilo visual |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Tamaño del botón |
+| `disabled` | `boolean` | `false` | Deshabilita |
+
+## ToggleGroup — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `type` | `"single" \| "multiple"` | `"single"` | Selección exclusiva o múltiple |
+| `variant` | `"group" \| "segmented" \| "pills"` | `"group"` | Estilo visual del grupo |
+| `value` | `string \| string[]` | — | Valor(es) controlado(s) |
+| `onValueChange` | `(value) => void` | — | Callback |
+| `required` | `boolean` | `false` | Solo `type="single"`: impide deselección |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Dirección (no aplica en `pills`) |
+| `disabled` | `boolean` | `false` | Deshabilita todo el grupo |
+
+## ToggleGroupItem — Props
+
+| Prop | Tipo | Descripción |
+|---|---|---|
+| `value` | `string` | **Requerido.** Identificador del ítem |
+| `disabled` | `boolean` | Deshabilita solo este ítem |
+
+## Variantes del grupo
+
+| Variante | Apariencia | Uso típico |
+|---|---|---|
+| `group` | Botones independientes con espacio | Toolbar de formato |
+| `segmented` | Botones unidos como un pill único | Selector de vista (Lista / Grid) |
+| `pills` | Chips redondeados separados | Filtros de etiquetas |
+
+## Patrón: selector de vista
+
+```tsx
+const [view, setView] = useState<"list" | "grid">("list");
+
+<ToggleGroup
+  type="single"
+  variant="segmented"
+  value={view}
+  onValueChange={(v) => v && setView(v as "list" | "grid")}
+  required
+>
+  <ToggleGroupItem value="list"><ListIcon /> Lista</ToggleGroupItem>
+  <ToggleGroupItem value="grid"><GridIcon /> Grid</ToggleGroupItem>
+</ToggleGroup>
+```
+
+:::tip
+Para `type="single"` usa `required` si quieres que siempre haya un valor seleccionado (sin toggle off).
+:::

@@ -1,0 +1,78 @@
+---
+title: Table (primitivas)
+description: Componentes de tabla HTML semánticos con estilos base. Úsalos cuando necesitas control total sobre la estructura. Para tablas de datos estándar usa DataTable.
+---
+
+import TablePrimitivesExamples from "../../../examples/TablePrimitivesExamples";
+
+## Importación
+
+```tsx
+import {
+  Table, TableHead, TableBody, TableRow,
+  TableHeadCell, TableCell,
+} from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<TablePrimitivesExamples client:only="react" />
+
+## Anatomía
+
+```
+Table               ← <table> en un wrapper overflow-x-auto.
+├── TableHead       ← <thead>
+│   └── TableRow    ← <tr>
+│       └── TableHeadCell ← <th> con estilos de encabezado.
+└── TableBody       ← <tbody>
+    └── TableRow    ← <tr> con hover sutil.
+        └── TableCell     ← <td> con padding base.
+```
+
+Todos los componentes usan `forwardRef` y aceptan los atributos nativos de su elemento HTML.
+
+## Table vs DataTable
+
+| | Primitivas `Table` | `DataTable` |
+|---|---|---|
+| Estructura | Manual | Automática desde `headers[]` + `rows[][]` |
+| Responsive | Manual | ✅ Tarjetas en mobile |
+| Celdas | Cualquier JSX | Cualquier JSX |
+| Cuándo usarlo | Tablas con colspan, rowspan, o layout personalizado | La mayoría de los casos |
+
+## Patrón: tabla con acciones
+
+```tsx
+import {
+  Table, TableHead, TableBody, TableRow,
+  TableHeadCell, TableCell,
+} from "@dubalu-dev/design-system";
+
+function InvoicesTable({ invoices }) {
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeadCell>Factura</TableHeadCell>
+          <TableHeadCell>Monto</TableHeadCell>
+          <TableHeadCell>Estado</TableHeadCell>
+          <TableHeadCell>Acciones</TableHeadCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {invoices.map((inv) => (
+          <TableRow key={inv.id}>
+            <TableCell>{inv.id}</TableCell>
+            <TableCell>{inv.amount}</TableCell>
+            <TableCell>{inv.status}</TableCell>
+            <TableCell>
+              <RowActionsMenu id={inv.id} />
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+```

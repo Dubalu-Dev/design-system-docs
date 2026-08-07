@@ -1,0 +1,81 @@
+---
+title: Datepicker
+description: Selector de fecha con calendario emergente. Basado en react-day-picker + Popover. Soporta restricción de rango y formato personalizado.
+---
+
+import DatepickerExamples from "../../../examples/DatepickerExamples";
+
+## Importación
+
+```tsx
+import { Datepicker } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<DatepickerExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `onChange` | `(date: Date \| undefined) => void` | — | **Requerido.** Callback al seleccionar fecha |
+| `value` | `Date` | — | Fecha seleccionada (controlado) |
+| `placeholder` | `string` | `"Selecciona una fecha"` | Texto del trigger vacío |
+| `disabled` | `boolean` | `false` | Deshabilita el picker |
+| `minDate` | `Date` | — | Primer día seleccionable |
+| `maxDate` | `Date` | — | Último día seleccionable |
+| `defaultOpen` | `boolean` | `false` | Abre el calendario al montar |
+| `formatDate` | `(date: Date) => string` | es-MX corto | Función de formateo del valor |
+| `className` | `string` | — | Clases sobre el trigger |
+
+El formato por defecto usa `Intl.DateTimeFormat` con locale `es-MX`.
+
+## Patrón: rango de fechas (dos Datepickers)
+
+```tsx
+import { useState } from "react";
+import { Datepicker } from "@dubalu-dev/design-system";
+
+function DateRangePicker() {
+  const [from, setFrom] = useState<Date | undefined>();
+  const [to, setTo] = useState<Date | undefined>();
+
+  return (
+    <div className="flex items-center gap-3">
+      <Datepicker
+        value={from}
+        onChange={(d) => { setFrom(d); if (to && d && d > to) setTo(undefined); }}
+        placeholder="Desde"
+        maxDate={to}
+      />
+      <span className="text-sm text-muted">—</span>
+      <Datepicker
+        value={to}
+        onChange={setTo}
+        placeholder="Hasta"
+        minDate={from}
+      />
+    </div>
+  );
+}
+```
+
+## Patrón: formulario con react-hook-form
+
+```tsx
+import { Controller } from "react-hook-form";
+import { Datepicker } from "@dubalu-dev/design-system";
+
+<Controller
+  name="birthdate"
+  control={control}
+  render={({ field }) => (
+    <Datepicker
+      value={field.value}
+      onChange={field.onChange}
+      maxDate={new Date()}
+    />
+  )}
+/>
+```

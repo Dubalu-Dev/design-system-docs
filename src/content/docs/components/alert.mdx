@@ -1,0 +1,81 @@
+---
+title: Alert
+description: Bandas de notificación con tono semántico (info, success, warning, error). Soporta título, cuerpo y botón de cierre opcional.
+---
+
+import AlertExamples from "../../../examples/AlertExamples";
+
+## Importación
+
+```tsx
+import { Alert } from "@dubalu-dev/design-system";
+import type { AlertTone } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<AlertExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `children` | `ReactNode` | — | **Requerido.** Cuerpo del mensaje |
+| `tone` | `"info" \| "success" \| "warning" \| "error"` | `"info"` | Tono semántico |
+| `title` | `string` | — | Título en negrita encima del cuerpo |
+| `onDismiss` | `() => void` | — | Si se provee, muestra el botón X |
+| `dismissLabel` | `string` | `"Cerrar alerta"` | `aria-label` del botón X |
+| `className` | `string` | — | Clases adicionales |
+
+## Alert vs AlertDialog
+
+| | `Alert` | `AlertDialog` |
+|---|---|---|
+| Bloquea la UI | ❌ No | ✅ Sí |
+| Requiere respuesta | ❌ No | ✅ Sí |
+| Uso ideal | Banners informativos, feedback | Confirmaciones destructivas |
+
+## Patrón: alert descartable con estado
+
+```tsx
+import { useState } from "react";
+import { Alert } from "@dubalu-dev/design-system";
+
+function PromoAlert() {
+  const [open, setOpen] = useState(true);
+
+  if (!open) return null;
+
+  return (
+    <Alert
+      tone="info"
+      title="¡Oferta de tiempo limitado!"
+      onDismiss={() => setOpen(false)}
+    >
+      Actualiza a Pro antes del 31 de agosto y obtén 2 meses gratis.
+    </Alert>
+  );
+}
+```
+
+## Patrón: alert de error de mutación
+
+```tsx
+import { useMutation } from "@tanstack/react-query";
+import { Alert } from "@dubalu-dev/design-system";
+
+function PaymentForm() {
+  const { mutate, error } = useMutation({ mutationFn: submitPayment });
+
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); mutate(); }}>
+      {error && (
+        <Alert tone="error" title="Error al procesar pago">
+          {error.message}
+        </Alert>
+      )}
+      {/* campos del formulario */}
+    </form>
+  );
+}
+```

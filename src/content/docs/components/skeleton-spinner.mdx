@@ -1,0 +1,80 @@
+---
+title: Skeleton / Spinner
+description: Dos primitivas de estado de carga. Skeleton para placeholders de contenido. Spinner para operaciones en curso.
+---
+
+import SkeletonSpinnerExamples from "../../../examples/SkeletonSpinnerExamples";
+
+## Importación
+
+```tsx
+import { Skeleton } from "@dubalu-dev/design-system";
+import { Spinner } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<SkeletonSpinnerExamples client:only="react" />
+
+## Skeleton — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `className` | `string` | — | Clases para definir ancho, alto y forma |
+
+`Skeleton` es un `<div>` con `animate-pulse`. El tamaño y la forma se controlan completamente con `className`.
+
+```tsx
+// Texto
+<Skeleton className="h-3 w-3/4 rounded" />
+
+// Círculo (avatar)
+<Skeleton className="h-10 w-10 rounded-full" />
+
+// Bloque (imagen)
+<Skeleton className="h-40 w-full rounded-lg" />
+```
+
+## Spinner — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | `"Loading..."` | `aria-label` del SVG. No se renderiza visualmente. |
+
+El `Spinner` es siempre un SVG de 24×24px con `animate-spin`. Para cambiar el tamaño, escala con `className="w-5 h-5"` o similar.
+
+## Skeleton vs Spinner
+
+| | `Skeleton` | `Spinner` |
+|---|---|---|
+| Uso | Contenido que tiene forma conocida | Operaciones cuya duración es incierta |
+| Visibilidad | Ocupa el espacio del contenido | Inline o centrado, sin estructura |
+| Ejemplo | Lista de posts cargando | Botón de submit, fetch de datos |
+
+## Patrón: carga condicional
+
+```tsx
+import { Skeleton, Spinner } from "@dubalu-dev/design-system";
+
+function UserCard({ user, isLoading }: { user?: User; isLoading: boolean }) {
+  if (isLoading) {
+    return (
+      <div className="p-4 space-y-2">
+        <Skeleton className="h-10 w-10 rounded-full" />
+        <Skeleton className="h-3 w-1/2 rounded" />
+        <Skeleton className="h-3 w-3/4 rounded" />
+      </div>
+    );
+  }
+  return <div>{/* contenido real */}</div>;
+}
+
+// Spinner en botón de submit
+function SaveButton({ isPending }: { isPending: boolean }) {
+  return (
+    <Button disabled={isPending}>
+      {isPending ? <><Spinner label="Guardando…" /> Guardando…</> : "Guardar"}
+    </Button>
+  );
+}
+```
