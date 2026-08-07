@@ -1,0 +1,66 @@
+---
+title: Card
+description: Contenedor con borde y fondo de superficie. Soporta modo interactivo para tarjetas seleccionables o clicables.
+---
+
+import CardExamples from "../../../examples/CardExamples";
+
+## Importación
+
+```tsx
+import { Card } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<CardExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `interactive` | `boolean` | `false` | Activa cursor pointer, hover shadow y focus ring |
+| `className` | `string` | — | Clases sobre el contenedor |
+
+`Card` extiende todos los atributos nativos de `<div>` (`onClick`, `onKeyDown`, etc.).
+
+## Patrón: tarjeta de métrica
+
+```tsx
+import { Card } from "@dubalu-dev/design-system";
+
+function MetricCard({ label, value, delta }: { label: string; value: string; delta: string }) {
+  return (
+    <Card className="p-6">
+      <p className="text-sm text-muted">{label}</p>
+      <p className="text-2xl font-bold mt-1">{value}</p>
+      <p className="text-xs text-muted mt-2">{delta}</p>
+    </Card>
+  );
+}
+```
+
+:::tip
+`Card` no incluye padding por defecto — agrega `className="p-4"` o `className="p-6"` según el contenido.
+:::
+
+## Patrón: selección de plan
+
+```tsx
+function PlanPicker({ plans, value, onChange }) {
+  return (
+    <div className="flex gap-3">
+      {plans.map((plan) => (
+        <Card
+          key={plan.id}
+          interactive
+          onClick={() => onChange(plan.id)}
+          className={value === plan.id ? "ring-2 ring-[var(--ds-color-primary)]" : ""}
+        >
+          {/* contenido del plan */}
+        </Card>
+      ))}
+    </div>
+  );
+}
+```

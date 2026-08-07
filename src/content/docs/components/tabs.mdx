@@ -1,0 +1,73 @@
+---
+title: Tabs
+description: Navegación por pestañas horizontal o vertical. Compound component sobre Radix UI Tabs.
+---
+
+import TabsExamples from "../../../examples/TabsExamples";
+
+## Importación
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<TabsExamples client:only="react" />
+
+## Anatomía
+
+```
+Tabs                  ← Raíz. Gestiona el tab activo.
+├── TabsList          ← Contenedor visual de pestañas.
+│   └── TabsTrigger  ← Pestaña individual.
+└── TabsContent       ← Panel de contenido del tab activo.
+```
+
+## Props clave
+
+### Tabs (raíz)
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `defaultValue` | `string` | — | Tab activo inicial (no controlado) |
+| `value` | `string` | — | Tab activo (controlado) |
+| `onValueChange` | `(value: string) => void` | — | Callback al cambiar tab |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Dirección del layout |
+
+### TabsTrigger
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `value` | `string` | — | **Requerido.** Identifica el panel asociado |
+| `disabled` | `boolean` | `false` | Deshabilita la pestaña |
+
+### TabsContent
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `value` | `string` | — | **Requerido.** Debe coincidir con el `value` del trigger |
+
+## Patrón: tabs controladas
+
+```tsx
+import { useState } from "react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@dubalu-dev/design-system";
+
+function SettingsTabs() {
+  const [tab, setTab] = useState("general");
+
+  return (
+    <Tabs value={tab} onValueChange={setTab}>
+      <TabsList>
+        <TabsTrigger value="general">General</TabsTrigger>
+        <TabsTrigger value="billing">Facturación</TabsTrigger>
+        <TabsTrigger value="team">Equipo</TabsTrigger>
+      </TabsList>
+      <TabsContent value="general">{/* ... */}</TabsContent>
+      <TabsContent value="billing">{/* ... */}</TabsContent>
+      <TabsContent value="team">{/* ... */}</TabsContent>
+    </Tabs>
+  );
+}
+```

@@ -18,6 +18,11 @@
   --ds-color-primary: #6d28d9;
   --ds-color-primary-fg: #ffffff;
   --ds-color-muted: #64748b;
+
+  /* Sidebar tokens */
+  --ds-sidebar-width: 16rem;
+  --ds-sidebar-item-active-bg: #ede9fe;
+  --ds-sidebar-item-active-fg: #5b21b6;
 }
 
 .dark {
@@ -25,6 +30,8 @@
   --ds-color-surface-fg: #f8fafc;
   --ds-color-border: #1e293b;
   --ds-color-muted: #94a3b8;
+  --ds-sidebar-item-active-bg: #2e1065;
+  --ds-sidebar-item-active-fg: #ede9fe;
 }
 
 /* Preview container — isolation so DS styles don't bleed into Starlight */
