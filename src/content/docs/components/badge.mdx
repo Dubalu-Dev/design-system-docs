@@ -1,0 +1,48 @@
+---
+title: Badge
+description: Etiqueta compacta para estados, categorías y contadores. Soporta 7 tones semánticos.
+---
+
+import BadgeExamples from "../../../examples/BadgeExamples";
+
+## Importación
+
+```tsx
+import { Badge } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<BadgeExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `tone` | `"primary" \| "neutral" \| "info" \| "warning" \| "dark" \| "outline" \| "brand"` | `"neutral"` | Color semántico del badge |
+| `className` | `string` | — | Clases CSS adicionales |
+| ...resto | `HTMLAttributes<span>` | — | Atributos nativos de `<span>` |
+
+## Guía de uso por tone
+
+| Tone | Cuándo usarlo |
+|---|---|
+| `primary` | Estado activo, seleccionado, exitoso |
+| `neutral` | Estado pendiente, sin definir |
+| `info` | Información contextual |
+| `warning` | Requiere atención, estado inactivo |
+| `dark` | Énfasis fuerte, contraste alto |
+| `outline` | Estilo sutil, sin relleno |
+| `brand` | Destacar la marca del producto |
+
+## Ejemplo de integración
+
+```tsx
+import { Badge } from "@dubalu-dev/design-system";
+
+function OrderStatus({ status }: { status: "active" | "pending" | "inactive" }) {
+  const tone = status === "active" ? "primary" : status === "pending" ? "neutral" : "warning";
+  const label = status === "active" ? "Activo" : status === "pending" ? "Pendiente" : "Inactivo";
+  return <Badge tone={tone}>{label}</Badge>;
+}
+```

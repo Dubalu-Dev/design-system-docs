@@ -1,0 +1,75 @@
+---
+title: DataTable
+description: Tabla de datos responsiva. En desktop muestra tabla tradicional; en mobile cambia a layout de cards por fila.
+---
+
+import DataTableExamples from "../../../examples/DataTableExamples";
+
+## Importación
+
+```tsx
+import { DataTable } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<DataTableExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `headers` | `string[]` | — | **Requerido.** Etiquetas de columna como texto plano (se usan como labels en mobile) |
+| `rows` | `ReactNode[][]` | — | **Requerido.** Filas de datos. Cada fila es un array de celdas (`string`, `number`, o cualquier `ReactNode`) |
+| `className` | `string` | — | Clases CSS adicionales sobre el contenedor |
+
+:::caution[headers debe ser string[]]
+`headers` acepta únicamente `string[]`. No se puede pasar JSX como header (ej. checkboxes). Si necesitas un control de selección masiva, ponlo en un toolbar encima de la tabla.
+:::
+
+## Comportamiento responsivo
+
+| Viewport | Layout |
+|---|---|
+| `≥ 640px` (sm) | Tabla HTML estándar con `<thead>` y `<tbody>` |
+| `< 640px` | Una card por fila con el header como label de cada campo |
+
+## Ejemplo con celdas ReactNode
+
+```tsx
+import { DataTable, Badge } from "@dubalu-dev/design-system";
+
+const headers = ["Nombre", "Ventas", "Estado"];
+
+const rows = [
+  [
+    <span key="n" className="font-semibold">Fernanda R.</span>,
+    "34",
+    <Badge key="s" tone="primary">Activa</Badge>,
+  ],
+];
+
+<DataTable headers={headers} rows={rows} />
+```
+
+## Integración con EmptyState
+
+Para tablas que pueden estar vacías, combina `DataTable` con `EmptyState`:
+
+```tsx
+import { DataTable, EmptyState } from "@dubalu-dev/design-system";
+import { IconReceipt } from "@tabler/icons-react";
+
+function VentasTable({ rows }: { rows: ReactNode[][] }) {
+  if (rows.length === 0) {
+    return (
+      <EmptyState
+        icon={IconReceipt}
+        title="Sin registros"
+        description="No hay datos para los filtros seleccionados."
+      />
+    );
+  }
+  return <DataTable headers={["Folio", "Monto", "Estado"]} rows={rows} />;
+}
+```

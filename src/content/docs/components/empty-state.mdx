@@ -1,0 +1,57 @@
+---
+title: EmptyState
+description: Placeholder para listas o secciones sin datos. Acepta un ícono, título, descripción y CTA opcional como ReactNode.
+---
+
+import EmptyStateExamples from "../../../examples/EmptyStateExamples";
+
+## Importación
+
+```tsx
+import { EmptyState } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<EmptyStateExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `icon` | `ComponentType<{ className?: string; size?: number }>` | — | **Requerido.** Componente SVG (Lucide, Tabler, o cualquier SVG como componente React) |
+| `title` | `string` | — | **Requerido.** Título principal del estado vacío |
+| `description` | `string` | — | **Requerido.** Descripción explicativa |
+| `action` | `ReactNode` | — | CTA opcional — cualquier ReactNode (Button, Link, etc.) |
+| `className` | `string` | — | Clases CSS adicionales sobre el contenedor |
+
+## Compatibilidad de íconos
+
+`EmptyState` acepta cualquier componente que reciba `className` y/o `size`. Funciona con:
+
+- **Lucide React**: `import { Package } from "lucide-react"`
+- **Tabler Icons**: `import { IconPackage } from "@tabler/icons-react"`
+- **SVG personalizado**: cualquier componente que acepte `className`
+
+## Ejemplo completo
+
+```tsx
+import { EmptyState, Button } from "@dubalu-dev/design-system";
+import { IconReceipt } from "@tabler/icons-react";
+import Link from "next/link";
+
+function VentasVacias() {
+  return (
+    <EmptyState
+      icon={IconReceipt}
+      title="Sin ventas registradas"
+      description="Las ventas de tus productos aparecerán aquí."
+      action={
+        <Button asChild>
+          <Link href="/productos/nuevo">Agregar producto</Link>
+        </Button>
+      }
+    />
+  );
+}
+```
