@@ -1,0 +1,65 @@
+---
+title: RadioGroup / NumberField
+description: RadioGroup para selección excluyente con composición flexible. NumberField para inputs numéricos sin flechas nativas.
+---
+
+import RadioNumberExamples from "../../../examples/RadioNumberExamples";
+
+## Importación
+
+```tsx
+import { RadioGroup, RadioGroupItem, RadioGroupField, NumberField } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<RadioNumberExamples client:only="react" />
+
+## RadioGroupField — Props (uso recomendado)
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | — | **Requerido.** Leyenda del grupo (`<legend>`) |
+| `options` | `RadioOption[]` | — | **Requerido.** Array de `{ value, label, description? }` |
+| `value` | `string` | — | Valor controlado |
+| `defaultValue` | `string` | — | Valor inicial no controlado |
+| `onValueChange` | `(value: string) => void` | — | Callback al cambiar |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Disposición de las opciones |
+| `error` | `string` | — | Mensaje de error bajo el grupo |
+| `description` | `string` | — | Texto descriptivo bajo la leyenda |
+| `disabled` | `boolean` | `false` | Deshabilita todo el grupo |
+
+## Composición manual: RadioGroup + RadioGroupItem
+
+Para layouts personalizados donde `RadioGroupField` no es suficiente:
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "@dubalu-dev/design-system";
+
+<RadioGroup value={plan} onValueChange={setPlan}>
+  {planes.map((p) => (
+    <label key={p.id} className="flex cursor-pointer items-center gap-3 rounded-lg border p-4">
+      <RadioGroupItem value={p.id} />
+      <div>
+        <p className="font-semibold">{p.nombre}</p>
+        <p className="text-sm text-gray-500">{p.precio}/mes</p>
+      </div>
+    </label>
+  ))}
+</RadioGroup>
+```
+
+## NumberField — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | — | **Requerido.** Etiqueta del campo |
+| `min` | `number` | — | Valor mínimo permitido |
+| `max` | `number` | — | Valor máximo permitido |
+| `step` | `number` | — | Incremento por paso |
+| `error` | `string` | — | Mensaje de error |
+| ...resto | `InputHTMLAttributes` (sin `type`) | — | `placeholder`, `disabled`, `defaultValue`, etc. |
+
+:::note
+`NumberField` suprime las flechas nativas del browser (`appearance: textfield`) para consistencia visual cross-browser.
+:::

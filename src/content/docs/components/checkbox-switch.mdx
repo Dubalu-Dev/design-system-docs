@@ -1,0 +1,73 @@
+---
+title: Checkbox / Switch
+description: Controles booleanos. Ambos tienen variante standalone y variante Field (con label y descripción integrados).
+---
+
+import CheckboxSwitchExamples from "../../../examples/CheckboxSwitchExamples";
+
+## Importación
+
+```tsx
+import { Checkbox, CheckboxField, Switch, SwitchField } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<CheckboxSwitchExamples client:only="react" />
+
+## Checkbox — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `checked` | `boolean \| "indeterminate"` | — | Estado controlado |
+| `defaultChecked` | `boolean` | — | Estado inicial no controlado |
+| `onCheckedChange` | `(checked: boolean \| "indeterminate") => void` | — | Callback al cambiar |
+| `disabled` | `boolean` | `false` | Deshabilita |
+| `name` / `value` | `string` | — | Para uso en formularios nativos |
+
+## CheckboxField — Props adicionales
+
+| Prop | Tipo | Descripción |
+|---|---|---|
+| `label` | `string` | **Requerido.** Texto clickeable asociado al checkbox |
+| `description` | `string` | Texto secundario bajo el label |
+| `error` | `string` | Mensaje de error |
+
+## Switch — Props
+
+Mismas props que `Checkbox` excepto `checked` que es `boolean` (sin `"indeterminate"`).
+
+## SwitchField — Props adicionales
+
+Mismas que `CheckboxField`.
+
+## Patrón: selección múltiple
+
+```tsx
+import { useState } from "react";
+import { CheckboxField } from "@dubalu-dev/design-system";
+
+const PERMISOS = ["ventas", "productos", "influencers", "reportes"];
+
+function PermisosForm() {
+  const [seleccionados, setSeleccionados] = useState<string[]>([]);
+
+  const toggle = (permiso: string) =>
+    setSeleccionados((prev) =>
+      prev.includes(permiso) ? prev.filter((p) => p !== permiso) : [...prev, permiso],
+    );
+
+  return (
+    <div className="flex flex-col gap-2">
+      {PERMISOS.map((p) => (
+        <CheckboxField
+          key={p}
+          label={p.charAt(0).toUpperCase() + p.slice(1)}
+          checked={seleccionados.includes(p)}
+          onCheckedChange={() => toggle(p)}
+        />
+      ))}
+    </div>
+  );
+}
+```
