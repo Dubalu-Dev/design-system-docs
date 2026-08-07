@@ -1,0 +1,60 @@
+---
+title: TextField / TextAreaField
+description: Campos de texto con label integrado, soporte de íconos y estado de error accesible.
+---
+
+import TextFieldExamples from "../../../examples/TextFieldExamples";
+
+## Importación
+
+```tsx
+import { TextField, TextAreaField } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<TextFieldExamples client:only="react" />
+
+## TextField — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | — | **Requerido.** Etiqueta visible y asociada al input (`htmlFor`) |
+| `error` | `string` | — | Mensaje de error. Activa estilos de error y `aria-invalid` |
+| `icon` | `ReactNode` | — | Ícono dentro del campo |
+| `iconPosition` | `"left" \| "right"` | `"left"` | Posición del ícono |
+| ...resto | `InputHTMLAttributes` | — | `placeholder`, `disabled`, `required`, `type`, etc. |
+
+## TextAreaField — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | — | **Requerido.** Etiqueta visible |
+| `error` | `string` | — | Mensaje de error |
+| `rows` | `number` | — | Alto inicial en líneas |
+| ...resto | `TextareaHTMLAttributes` | — | Todos los atributos nativos de `<textarea>` |
+
+## Integración con React Hook Form
+
+```tsx
+import { useForm } from "react-hook-form";
+import { TextField, TextAreaField } from "@dubalu-dev/design-system";
+
+function ProductForm() {
+  const { register, formState: { errors } } = useForm<{ name: string; description: string }>();
+  return (
+    <form>
+      <TextField
+        label="Nombre del producto"
+        error={errors.name?.message}
+        {...register("name", { required: "El nombre es requerido" })}
+      />
+      <TextAreaField
+        label="Descripción"
+        error={errors.description?.message}
+        {...register("description")}
+      />
+    </form>
+  );
+}
+```

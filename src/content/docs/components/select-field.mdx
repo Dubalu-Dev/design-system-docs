@@ -1,0 +1,64 @@
+---
+title: SelectField / NativeSelect
+description: Dos variantes de selector. SelectField usa Radix UI (accesible, estilizable). NativeSelect es el select HTML nativo con estilos consistentes.
+---
+
+import SelectExamples from "../../../examples/SelectExamples";
+
+## Importación
+
+```tsx
+import { SelectField, NativeSelect } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<SelectExamples client:only="react" />
+
+## SelectField — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | — | **Requerido.** Etiqueta del campo |
+| `options` | `SelectFieldOption[]` | — | **Requerido.** Array de `{ value, label }` |
+| `value` | `string` | — | Valor controlado |
+| `defaultValue` | `string` | — | Valor inicial no controlado |
+| `onValueChange` | `(value: string) => void` | — | Callback al cambiar |
+| `placeholder` | `string` | `"Select..."` | Texto placeholder |
+| `error` | `string` | — | Mensaje de error |
+| `disabled` | `boolean` | `false` | Deshabilita el campo |
+| `className` | `string` | — | Clases CSS adicionales |
+
+## NativeSelect — Props
+
+Extiende `SelectHTMLAttributes<HTMLSelectElement>` — todos los atributos nativos de `<select>` más `className`.
+
+## ¿Cuándo usar cada uno?
+
+| Caso | Recomendación |
+|---|---|
+| Formularios generales | `SelectField` — accesible y estilizable |
+| Filtros rápidos / tablas | `NativeSelect` — más ligero, renderizado nativo |
+| Modo mobile-first | `NativeSelect` — mejor UX en dispositivos táctiles |
+
+## Integración con React Hook Form
+
+```tsx
+import { Controller } from "react-hook-form";
+import { SelectField } from "@dubalu-dev/design-system";
+
+<Controller
+  name="rol"
+  control={control}
+  rules={{ required: "Selecciona un rol" }}
+  render={({ field, fieldState }) => (
+    <SelectField
+      label="Rol"
+      options={ROLES}
+      value={field.value}
+      onValueChange={field.onChange}
+      error={fieldState.error?.message}
+    />
+  )}
+/>
+```
