@@ -78,6 +78,29 @@ export default {
 };
 ```
 
+## 4.1 — Plugin de animaciones (requerido para Modal, Drawer, AlertDialog, DropdownMenu, Tooltip y Popover)
+
+Los componentes de overlay usan clases de `tailwindcss-animate` para sus
+transiciones de entrada/salida. Sin este plugin las animaciones no se verán.
+
+```bash
+pnpm add -D tailwindcss-animate
+```
+
+**Tailwind v4** — agrega en tu CSS raíz:
+
+```css
+@plugin "tailwindcss-animate";
+```
+
+**Tailwind v3** — agrega en `tailwind.config.js`:
+
+```js
+export default {
+  plugins: [require("tailwindcss-animate")],
+};
+```
+
 ## 5 — Primer uso
 
 ```tsx

@@ -13,6 +13,24 @@ import {
 } from "@dubalu-dev/design-system";
 ```
 
+:::caution[Requiere tailwindcss-animate]
+Las animaciones de deslizamiento de este componente (`slide-in-from-*`, `slide-out-to-*`) dependen de `tailwindcss-animate`. Si no está instalado el drawer aparecerá sin transición.
+
+```bash
+pnpm add -D tailwindcss-animate
+```
+
+**Tailwind v4** — agrega en tu CSS raíz:
+```css
+@plugin "tailwindcss-animate";
+```
+
+**Tailwind v3** — agrega en `tailwind.config.js`:
+```js
+plugins: [require("tailwindcss-animate")]
+```
+:::
+
 ## Ejemplos
 
 <DrawerExamples client:only="react" />
