@@ -1,5 +1,27 @@
-import { EmptyState, Button } from "@dubalu-dev/design-system";
+// EmptyState will be available from @dubalu-dev/design-system once v0.12.1 publishes (PR #445).
+// Using an inline implementation with identical API for the docs build in the interim.
+import type { ComponentType, ReactNode } from "react";
+import { Button } from "@dubalu-dev/design-system";
 import { Preview } from "../components/Preview";
+
+interface EmptyStateProps {
+  icon?: ComponentType<{ className?: string }>;
+  title: string;
+  description?: string;
+  action?: ReactNode;
+  className?: string;
+}
+
+function EmptyState({ icon: Icon, title, description, action, className }: EmptyStateProps) {
+  return (
+    <div className={`flex flex-col items-center justify-center gap-3 py-10 px-6 text-center ${className ?? ""}`}>
+      {Icon && <Icon className="h-10 w-10 text-[var(--ds-color-muted)]" />}
+      <p className="text-sm font-semibold text-[var(--ds-color-surface-fg)]">{title}</p>
+      {description && <p className="text-sm text-[var(--ds-color-muted)] max-w-xs">{description}</p>}
+      {action && <div className="mt-1">{action}</div>}
+    </div>
+  );
+}
 
 function PackageIcon({ className }: { className?: string }) {
   return (
