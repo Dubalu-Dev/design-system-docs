@@ -1,0 +1,91 @@
+---
+title: DropdownMenu
+description: Menú contextual flotante con soporte de items, separadores, labels, checkboxes y radio groups.
+---
+
+import DropdownMenuExamples from "../../../examples/DropdownMenuExamples";
+
+## Importación
+
+```tsx
+import {
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
+  DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup, DropdownMenuRadioItem,
+} from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<DropdownMenuExamples client:only="react" />
+
+## Anatomía
+
+```
+DropdownMenu
+├── DropdownMenuTrigger        ← Elemento que abre el menú.
+└── DropdownMenuContent        ← Portal + contenedor del menú.
+    ├── DropdownMenuLabel      ← Título de sección (no clickeable).
+    ├── DropdownMenuSeparator  ← Línea divisoria.
+    ├── DropdownMenuItem       ← Ítem estándar.
+    ├── DropdownMenuCheckboxItem   ← Ítem con estado checked.
+    └── DropdownMenuRadioGroup     ← Grupo de selección exclusiva.
+        └── DropdownMenuRadioItem
+```
+
+## Props clave
+
+### DropdownMenuContent
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `align` | `"start" \| "center" \| "end"` | `"end"` | Alineación respecto al trigger |
+| `sideOffset` | `number` | `6` | Distancia entre trigger y menú |
+
+### DropdownMenuItem
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `destructive` | `boolean` | `false` | Pinta el ítem en rojo (para acciones peligrosas) |
+| `inset` | `boolean` | `false` | Añade padding izquierdo para alinear con items con ícono |
+| `disabled` | `boolean` | `false` | Deshabilita el ítem |
+| `onSelect` | `() => void` | — | Callback al seleccionar |
+
+### DropdownMenuCheckboxItem
+
+| Prop | Tipo | Descripción |
+|---|---|---|
+| `checked` | `boolean` | Estado controlado |
+| `onCheckedChange` | `(checked: boolean) => void` | Callback |
+
+## Patrón: menú de acciones en tabla
+
+```tsx
+import {
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
+  DropdownMenuItem, DropdownMenuSeparator,
+} from "@dubalu-dev/design-system";
+
+function RowActions({ id }: { id: string }) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button type="button" aria-label="Acciones">⋯</button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onSelect={() => navigate(`/influencers/${id}`)}>
+          Ver perfil
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => navigate(`/influencers/${id}/edit`)}>
+          Editar
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem destructive onSelect={() => handleDelete(id)}>
+          Eliminar
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+```

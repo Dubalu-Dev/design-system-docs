@@ -1,0 +1,68 @@
+---
+title: Modal
+description: Diálogo centrado bloqueante. Compuesto por Modal, ModalTrigger, ModalContent y ModalFooter sobre Radix Dialog.
+---
+
+import ModalExamples from "../../../examples/ModalExamples";
+
+## Importación
+
+```tsx
+import { Modal, ModalTrigger, ModalContent, ModalFooter } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<ModalExamples client:only="react" />
+
+## Anatomía
+
+```
+Modal                    ← Raíz. Gestiona estado open/onOpenChange.
+├── ModalTrigger         ← Elemento que abre el modal (asChild recomendado).
+└── ModalContent         ← Portal + overlay + contenido.
+    └── ModalFooter      ← Contenedor de acciones (justify-end).
+```
+
+## Props — ModalContent
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `title` | `string` | — | **Requerido.** Título del diálogo (accesible vía `aria-labelledby`) |
+| `description` | `string` | — | Subtítulo bajo el título |
+| `hideTitle` | `boolean` | `false` | Oculta el título visualmente (queda en `sr-only`) |
+| `onClose` | `() => void` | — | Callback al cerrar (Esc, overlay, botón X) |
+| `closeLabel` | `string` | `"Cerrar"` | Aria-label del botón X |
+| `className` | `string` | — | Clases sobre el contenedor del diálogo |
+
+## Patrón controlado
+
+```tsx
+import { useState } from "react";
+import { Modal, ModalTrigger, ModalContent, ModalFooter, Button } from "@dubalu-dev/design-system";
+
+function ConfirmDialog({ onConfirm }: { onConfirm: () => void }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Modal open={open} onOpenChange={setOpen}>
+      <ModalTrigger asChild>
+        <Button>Eliminar</Button>
+      </ModalTrigger>
+      <ModalContent
+        title="¿Eliminar registro?"
+        description="Esta acción no se puede deshacer."
+        onClose={() => setOpen(false)}
+      >
+        <ModalFooter>
+          <Button variant="outline" onClick={() => setOpen(false)}>Cancelar</Button>
+          <Button onClick={() => { onConfirm(); setOpen(false); }}>Confirmar</Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+}
+```
+
+:::tip
+Usa `ModalTrigger asChild` para que el trigger conserve sus propios estilos y semántica HTML.
+:::

@@ -1,0 +1,82 @@
+---
+title: Drawer
+description: Panel deslizante desde cualquier borde. Ideal para filtros, detalles y formularios secundarios sin abandonar el contexto actual.
+---
+
+import DrawerExamples from "../../../examples/DrawerExamples";
+
+## Importación
+
+```tsx
+import {
+  Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerFooter,
+} from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<DrawerExamples client:only="react" />
+
+## Anatomía
+
+```
+Drawer
+├── DrawerTrigger        ← Abre el drawer.
+└── DrawerContent        ← Portal + overlay + panel.
+    ├── (children)       ← Contenido con scroll automático.
+    └── DrawerFooter     ← Barra de acciones fija en la base del panel.
+        └── DrawerClose  ← Botón de cierre (asChild recomendado).
+```
+
+## Props — DrawerContent
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `side` | `"left" \| "right" \| "top" \| "bottom"` | `"right"` | Borde desde donde aparece |
+| `title` | `string` | — | **Requerido.** Título del panel |
+| `description` | `string` | — | Subtítulo bajo el título |
+| `hideTitle` | `boolean` | `false` | Oculta el título visualmente |
+| `onClose` | `() => void` | — | Callback al cerrar (Esc, overlay, botón X) |
+| `closeLabel` | `string` | `"Cerrar"` | Aria-label del botón X |
+| `animated` | `boolean` | `true` | Activa animaciones de entrada/salida |
+| `className` | `string` | — | Clases sobre el panel |
+
+## Guía de `side`
+
+| Side | Caso de uso típico |
+|---|---|
+| `right` | Panel de detalles, configuración, filtros en desktop |
+| `left` | Navegación lateral, árbol de recursos |
+| `bottom` | Filtros y acciones en mobile |
+| `top` | Notificaciones, banners interactivos |
+
+## Patrón: filtros en mobile
+
+```tsx
+import { useState } from "react";
+import { Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerFooter, Button } from "@dubalu-dev/design-system";
+
+function FiltrosDrawer({ onApply }: { onApply: (filters: Filters) => void }) {
+  const [open, setOpen] = useState(false);
+  const [filters, setFilters] = useState<Filters>({});
+
+  return (
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Filtros</Button>
+      </DrawerTrigger>
+      <DrawerContent side="bottom" title="Filtrar" onClose={() => setOpen(false)}>
+        {/* campos de filtro */}
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button variant="ghost" onClick={() => setFilters({})}>Limpiar</Button>
+          </DrawerClose>
+          <DrawerClose asChild>
+            <Button onClick={() => onApply(filters)}>Aplicar</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+```

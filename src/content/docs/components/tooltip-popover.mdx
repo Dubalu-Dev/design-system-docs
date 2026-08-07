@@ -1,0 +1,64 @@
+---
+title: Tooltip / Popover
+description: Dos patrones de overlay flotante. Tooltip para info contextual breve al hover. Popover para contenido interactivo al click.
+---
+
+import TooltipPopoverExamples from "../../../examples/TooltipPopoverExamples";
+
+## Importación
+
+```tsx
+import { Tooltip, TooltipProvider } from "@dubalu-dev/design-system";
+import { Popover, PopoverTrigger, PopoverContent } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<TooltipPopoverExamples client:only="react" />
+
+## Tooltip — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `content` | `ReactNode` | — | **Requerido.** Contenido del tooltip |
+| `children` | `ReactNode` | — | **Requerido.** Elemento trigger (debe aceptar `ref`) |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Lado de aparición |
+| `delayDuration` | `number` | — | Override del delay en ms (hereda del `TooltipProvider`) |
+
+## TooltipProvider — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `delayDuration` | `number` | `300` | Delay en ms antes de mostrar todos los tooltips hijos |
+| `children` | `ReactNode` | — | **Requerido.** |
+
+:::caution[TooltipProvider es obligatorio]
+`Tooltip` debe estar dentro de un `TooltipProvider`. Colócalo en el layout raíz para no repetirlo en cada componente.
+:::
+
+```tsx
+// layout.tsx (una sola vez, arriba del árbol)
+import { TooltipProvider } from "@dubalu-dev/design-system";
+
+export default function Layout({ children }) {
+  return <TooltipProvider>{children}</TooltipProvider>;
+}
+```
+
+## PopoverContent — Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | Lado de aparición |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | Alineación respecto al trigger |
+| `sideOffset` | `number` | `6` | Distancia en px entre trigger y popover |
+| `className` | `string` | — | Clases sobre el contenedor |
+
+## Tooltip vs Popover
+
+| | `Tooltip` | `Popover` |
+|---|---|---|
+| Se abre con | Hover / focus | Click |
+| Contenido | Texto breve | Cualquier ReactNode |
+| Interactivo | ❌ No | ✅ Sí (formularios, listas) |
+| Cierre | Al salir del hover | Click fuera o botón explícito |
