@@ -1,0 +1,55 @@
+---
+title: Progress
+description: Barra de progreso animada. Acepta value y max para calcular el porcentaje automáticamente.
+---
+
+import ProgressExamples from "../../../examples/ProgressExamples";
+
+## Importación
+
+```tsx
+import { Progress } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<ProgressExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `value` | `number` | — | Valor actual (se clampea entre 0 y `max`) |
+| `max` | `number` | `100` | Valor máximo |
+| `className` | `string` | — | Clases sobre el contenedor |
+
+El porcentaje se calcula internamente: `Math.min(100, Math.max(0, (value / max) * 100))`.
+
+## Patrón: upload con estado real
+
+```tsx
+import { useState } from "react";
+import { Progress } from "@dubalu-dev/design-system";
+
+function UploadProgress({ progress }: { progress: number }) {
+  return (
+    <div className="w-full max-w-sm">
+      <div className="flex justify-between text-xs mb-1">
+        <span>Subiendo archivo…</span>
+        <span>{Math.round(progress)}%</span>
+      </div>
+      <Progress value={progress} />
+    </div>
+  );
+}
+```
+
+## Patrón: cuota de uso
+
+```tsx
+<Progress value={usedStorage} max={totalStorage} />
+```
+
+:::caution
+`value` mayor que `max` se clampea a `max` — no genera error. Si tu fuente de datos puede devolver valores negativos, clampéalos antes de pasarlos.
+:::

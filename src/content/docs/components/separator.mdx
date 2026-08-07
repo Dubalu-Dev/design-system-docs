@@ -1,0 +1,46 @@
+---
+title: Separator
+description: Línea divisoria horizontal o vertical. Semánticamente un <hr> accesible o decorativo.
+---
+
+import SeparatorExamples from "../../../examples/SeparatorExamples";
+
+## Importación
+
+```tsx
+import { Separator } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<SeparatorExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Dirección de la línea |
+| `decorative` | `boolean` | `true` | Si es `false`, añade `role="separator"` para lectores de pantalla |
+| `className` | `string` | — | Clases adicionales |
+
+## Cuándo usar `decorative={false}`
+
+Cuando la separación tiene significado semántico (ej. divide secciones de contenido relacionadas), usa `decorative={false}` para que los lectores de pantalla lo anuncien.
+
+```tsx
+<Separator decorative={false} />
+```
+
+Para separaciones puramente visuales (entre items de una lista de precios, breadcrumbs), el default `decorative={true}` es correcto.
+
+## Uso en vertical
+
+Para `orientation="vertical"` el elemento padre necesita `display: flex` y altura definida:
+
+```tsx
+<div className="flex items-center h-5 gap-3">
+  <span>Inicio</span>
+  <Separator orientation="vertical" />
+  <span>Productos</span>
+</div>
+```

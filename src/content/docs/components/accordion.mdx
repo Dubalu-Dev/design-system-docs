@@ -1,0 +1,83 @@
+---
+title: Accordion
+description: Lista de paneles colapsables. Soporta tipo single (uno abierto a la vez) y multiple (varios simultáneos).
+---
+
+import AccordionExamples from "../../../examples/AccordionExamples";
+
+## Importación
+
+```tsx
+import {
+  Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+} from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<AccordionExamples client:only="react" />
+
+## Anatomía
+
+```
+Accordion
+└── AccordionItem       ← Un ítem del acordeón (value obligatorio).
+    ├── AccordionTrigger ← Botón de apertura con chevron animado.
+    └── AccordionContent ← Contenido colapsable.
+```
+
+## Props clave
+
+### Accordion (raíz)
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `type` | `"single" \| "multiple"` | `"single"` | Uno o varios ítems abiertos simultáneamente |
+| `collapsible` | `boolean` | `true` | (solo `type="single"`) Permite cerrar el ítem activo |
+| `defaultValue` | `string \| string[]` | — | Valor(es) abierto(s) por defecto |
+| `value` | `string \| string[]` | — | Controlado |
+| `onValueChange` | `(value) => void` | — | Callback al cambiar |
+
+### AccordionItem
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `value` | `string` | — | **Requerido.** Identificador único del ítem |
+
+### AccordionTrigger / AccordionContent
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `animated` | `boolean` | `true` | Activa animación de chevron y deslizamiento |
+
+## Accordion vs Collapsible
+
+| | `Accordion` | `Collapsible` |
+|---|---|---|
+| Ítems | Múltiples | Uno |
+| Uso ideal | FAQs, detalles de producto | Secciones opcionales, filtros |
+| Tipo | `"single"` o `"multiple"` | — |
+
+## Patrón: sección FAQ
+
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@dubalu-dev/design-system";
+
+const faqs = [
+  { id: "1", q: "¿Cómo funciona?", a: "..." },
+  { id: "2", q: "¿Cuánto cuesta?", a: "..." },
+];
+
+function FAQ() {
+  return (
+    <Accordion type="single" collapsible>
+      {faqs.map(({ id, q, a }) => (
+        <AccordionItem key={id} value={id}>
+          <AccordionTrigger>{q}</AccordionTrigger>
+          <AccordionContent>{a}</AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  );
+}
+```

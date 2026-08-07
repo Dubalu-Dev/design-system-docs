@@ -1,0 +1,76 @@
+---
+title: Collapsible
+description: Toggle de expand/collapse para una sección opcional. Más liviano que Accordion cuando solo hay un ítem.
+---
+
+import CollapsibleExamples from "../../../examples/CollapsibleExamples";
+
+## Importación
+
+```tsx
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<CollapsibleExamples client:only="react" />
+
+## Anatomía
+
+```
+Collapsible                ← Raíz. Gestiona el estado open.
+├── CollapsibleTrigger     ← Elemento que abre/cierra (asChild recomendado).
+└── CollapsibleContent     ← Contenido colapsable.
+```
+
+## Props clave
+
+### Collapsible (raíz)
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `open` | `boolean` | — | Estado controlado |
+| `defaultOpen` | `boolean` | `false` | Estado inicial no controlado |
+| `onOpenChange` | `(open: boolean) => void` | — | Callback al cambiar |
+| `disabled` | `boolean` | `false` | Deshabilita el trigger |
+
+### CollapsibleTrigger
+
+| Prop | Tipo | Descripción |
+|---|---|---|
+| `asChild` | `boolean` | Fusiona el comportamiento en el único hijo (recomendado con `Button`) |
+
+### CollapsibleContent
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `animated` | `boolean` | `false` | Activa animación de deslizamiento al abrir/cerrar |
+
+## Patrón controlado con Button
+
+```tsx
+import { useState } from "react";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent, Button } from "@dubalu-dev/design-system";
+
+function FiltrosOpcionales() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Collapsible open={open} onOpenChange={setOpen}>
+      <div className="flex items-center gap-3">
+        <span className="text-sm font-medium">Filtros avanzados</span>
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" size="sm">{open ? "Ocultar" : "Mostrar"}</Button>
+        </CollapsibleTrigger>
+      </div>
+      <CollapsibleContent animated className="mt-3">
+        {/* campos de filtro */}
+      </CollapsibleContent>
+    </Collapsible>
+  );
+}
+```
+
+:::tip
+Usa `animated` en `CollapsibleContent` para suavizar la transición. Por defecto está desactivado para evitar layout shifts en SSR.
+:::

@@ -1,0 +1,104 @@
+---
+title: Sidebar
+description: Navegación lateral estructurada con header, secciones, ítems con ícono/badge/estado activo, y footer.
+---
+
+import SidebarExamples from "../../../examples/SidebarExamples";
+
+## Importación
+
+```tsx
+import {
+  Sidebar, SidebarHeader, SidebarContent, SidebarFooter,
+  SidebarSection, SidebarItem,
+} from "@dubalu-dev/design-system";
+```
+
+## Ejemplo
+
+<SidebarExamples client:only="react" />
+
+## Anatomía
+
+```
+Sidebar
+├── SidebarHeader     ← Logo o nombre de la app (borde inferior, padding fijo).
+├── SidebarContent    ← Zona scrollable con las secciones.
+│   └── SidebarSection
+│       └── SidebarItem
+└── SidebarFooter     ← Acciones globales: perfil, logout (borde superior).
+```
+
+## Props — SidebarItem
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | — | **Requerido.** Texto del ítem |
+| `icon` | `ReactNode` | — | Ícono a la izquierda del label |
+| `badge` | `ReactNode` | — | Elemento a la derecha (contador, dot, etc.) |
+| `active` | `boolean` | `false` | Resalta el ítem como seleccionado |
+| `disabled` | `boolean` | `false` | Deshabilita interacción |
+| `href` | `string` | — | Renderiza `<a>` en vez de `<button>` |
+| `asChild` | `boolean` | `false` | Fusiona estilos en el único hijo (para Next.js `<Link>`) |
+| `onClick` | `() => void` | — | Callback al hacer click |
+
+## Props — SidebarSection
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | — | Título de la sección (uppercase, muted) |
+
+## Variables CSS requeridas
+
+El `Sidebar` usa estas variables además de las base del DS:
+
+| Variable | Propósito |
+|---|---|
+| `--ds-sidebar-width` | Ancho del panel (default 16rem) |
+| `--ds-sidebar-item-active-bg` | Fondo del ítem activo |
+| `--ds-sidebar-item-active-fg` | Color de texto del ítem activo |
+
+Agrégalas en tu CSS raíz si los defaults no coinciden con tu tema.
+
+## Integración con Next.js Link
+
+```tsx
+import Link from "next/link";
+import { SidebarItem } from "@dubalu-dev/design-system";
+
+// asChild fusiona los estilos de SidebarItem en el <Link>
+<SidebarItem label="Dashboard" icon={<HomeIcon />} active asChild>
+  <Link href="/dashboard" />
+</SidebarItem>
+```
+
+## Patrón: layout completo
+
+```tsx
+import {
+  Sidebar, SidebarHeader, SidebarContent, SidebarFooter,
+  SidebarSection, SidebarItem,
+} from "@dubalu-dev/design-system";
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex h-screen overflow-hidden">
+      <Sidebar>
+        <SidebarHeader>
+          <span className="font-semibold">Mi App</span>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarSection>
+            <SidebarItem label="Dashboard" icon={<HomeIcon />} href="/dashboard" />
+            <SidebarItem label="Usuarios" icon={<UsersIcon />} href="/users" />
+          </SidebarSection>
+        </SidebarContent>
+        <SidebarFooter>
+          <SidebarItem label="Salir" icon={<LogoutIcon />} onClick={handleLogout} />
+        </SidebarFooter>
+      </Sidebar>
+      <main className="flex-1 overflow-y-auto">{children}</main>
+    </div>
+  );
+}
+```
