@@ -12,6 +12,24 @@ import { Tooltip, TooltipProvider } from "@dubalu-dev/design-system";
 import { Popover, PopoverTrigger, PopoverContent } from "@dubalu-dev/design-system";
 ```
 
+:::caution[Requiere tailwindcss-animate]
+Las animaciones de entrada/salida de estos componentes dependen de `tailwindcss-animate`. Si no está instalado las transiciones aparecerán instantáneas.
+
+```bash
+pnpm add -D tailwindcss-animate
+```
+
+**Tailwind v4** — agrega en tu CSS raíz:
+```css
+@plugin "tailwindcss-animate";
+```
+
+**Tailwind v3** — agrega en `tailwind.config.js`:
+```js
+plugins: [require("tailwindcss-animate")]
+```
+:::
+
 ## Ejemplos
 
 <TooltipPopoverExamples client:only="react" />
