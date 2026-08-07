@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/*
+  Scan DS dist for Tailwind class names so they aren't purged.
+  The DS uses Tailwind utility classes in its compiled output.
+*/
+@source "../../node_modules/@dubalu-dev/design-system/dist/**/*.{js,mjs,cjs}";
+
+/*
+  DS design tokens — CSS custom properties used by the components.
+  These mirror the variables defined in the DS source theme.
+*/
+:root {
+  --ds-color-surface: #ffffff;
+  --ds-color-surface-fg: #0f172a;
+  --ds-color-border: #e2e8f0;
+  --ds-radius-base: 0.5rem;
+  --ds-color-primary: #6d28d9;
+  --ds-color-primary-fg: #ffffff;
+  --ds-color-muted: #64748b;
+}
+
+.dark {
+  --ds-color-surface: #0f172a;
+  --ds-color-surface-fg: #f8fafc;
+  --ds-color-border: #1e293b;
+  --ds-color-muted: #94a3b8;
+}
+
+/* Preview container — isolation so DS styles don't bleed into Starlight */
+.ds-preview {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-block: 1rem;
+  background: var(--sl-color-bg);
+}
+
+.ds-preview + .ds-preview {
+  margin-top: 0.5rem;
+}

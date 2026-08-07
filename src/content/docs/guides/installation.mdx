@@ -1,0 +1,96 @@
+---
+title: Instalación
+description: Cómo instalar y configurar @dubalu-dev/design-system en tu proyecto.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+## Requisitos previos
+
+- Node 20+
+- pnpm 9+ (recomendado) o npm 10+
+- Acceso a GitHub Packages con `read:packages` scope
+- Tailwind CSS configurado en tu proyecto
+
+## 1 — Autenticación con GitHub Packages
+
+El paquete es privado. Necesitas un token personal con `read:packages`:
+
+```bash
+gh auth refresh -s read:packages
+export DUBALU_NPM_TOKEN=$(gh auth token)
+```
+
+Agrega `.npmrc` en la raíz de tu proyecto:
+
+```ini
+@dubalu-dev:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${DUBALU_NPM_TOKEN}
+```
+
+## 2 — Instalación
+
+<Tabs>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @dubalu-dev/design-system
+    ```
+  </TabItem>
+  <TabItem label="npm">
+    ```bash
+    npm install @dubalu-dev/design-system
+    ```
+  </TabItem>
+</Tabs>
+
+## 3 — Peer dependencies
+
+El paquete requiere las siguientes peer dependencies en tu proyecto:
+
+| Paquete | Rango |
+|---|---|
+| `react` | `^18.0.0 \|\| ^19.0.0` |
+| `react-dom` | `^18.0.0 \|\| ^19.0.0` |
+| `tailwindcss` | `^3.0.0 \|\| ^4.0.0` |
+| `clsx` | `^2.0.0` |
+| `tailwind-merge` | `^2.0.0 \|\| ^3.0.0` |
+
+## 4 — Configurar Tailwind
+
+Para que los estilos de los componentes se generen correctamente, añade el
+directorio `dist` del paquete a los `content` paths de Tailwind:
+
+**Tailwind v4 (`tailwind.css`):**
+
+```css
+@import "tailwindcss";
+@source "../../node_modules/@dubalu-dev/design-system/dist/**/*.{js,mjs}";
+```
+
+**Tailwind v3 (`tailwind.config.js`):**
+
+```js
+export default {
+  content: [
+    // ... tus archivos
+    "./node_modules/@dubalu-dev/design-system/dist/**/*.{js,mjs}",
+  ],
+};
+```
+
+## 5 — Primer uso
+
+```tsx
+import { Button, Badge } from "@dubalu-dev/design-system";
+
+export default function MyPage() {
+  return (
+    <div>
+      <Badge tone="primary">Nuevo</Badge>
+      <Button variant="primary" onClick={() => alert("¡Hola!")}>
+        Acción principal
+      </Button>
+    </div>
+  );
+}
+```
