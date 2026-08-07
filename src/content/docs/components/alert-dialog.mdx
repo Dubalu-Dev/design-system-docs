@@ -1,0 +1,71 @@
+---
+title: AlertDialog
+description: Diálogo de confirmación bloqueante. A diferencia de Modal, el foco no puede escapar hasta que el usuario responde. Usar para acciones destructivas o irreversibles.
+---
+
+import AlertDialogExamples from "../../../examples/AlertDialogExamples";
+
+## Importación
+
+```tsx
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<AlertDialogExamples client:only="react" />
+
+## Anatomía
+
+```
+AlertDialog              ← Raíz.
+├── AlertDialogTrigger   ← Abre el diálogo.
+└── AlertDialogContent   ← Portal + overlay + título + descripción + botones.
+```
+
+## Props — AlertDialogContent
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `title` | `string` | — | **Requerido.** Pregunta de confirmación |
+| `description` | `string` | — | Consecuencias de la acción |
+| `confirmLabel` | `string` | `"Confirm"` | Texto del botón de confirmación |
+| `cancelLabel` | `string` | `"Cancel"` | Texto del botón de cancelar |
+| `onConfirm` | `() => void` | — | **Requerido.** Callback al confirmar |
+| `onCancel` | `() => void` | — | Callback al cancelar |
+| `variant` | `"default" \| "destructive"` | `"default"` | `"destructive"` pinta el botón de confirmar en rojo |
+
+## Modal vs AlertDialog
+
+| | `Modal` | `AlertDialog` |
+|---|---|---|
+| Cierre con Esc / overlay | ✅ Sí | ❌ No (el usuario debe responder) |
+| Contenido libre | ✅ Sí | ❌ Solo título + descripción + 2 botones |
+| Uso recomendado | Formularios, info detallada | Confirmaciones, acciones destructivas |
+
+## Integración con mutations
+
+```tsx
+import { useMutation } from "@tanstack/react-query";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, Button } from "@dubalu-dev/design-system";
+
+function DeleteButton({ id }: { id: string }) {
+  const [open, setOpen] = useState(false);
+  const { mutate, isPending } = useMutation({ mutationFn: () => deleteRecord(id) });
+  return (
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline" size="sm">Eliminar</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent
+        title="¿Eliminar este registro?"
+        description="Se eliminará permanentemente y no podrás recuperarlo."
+        confirmLabel={isPending ? "Eliminando..." : "Sí, eliminar"}
+        variant="destructive"
+        onConfirm={() => mutate()}
+        onCancel={() => setOpen(false)}
+      />
+    </AlertDialog>
+  );
+}
+```
