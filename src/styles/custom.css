@@ -25,7 +25,8 @@
   --ds-sidebar-item-active-fg: #5b21b6;
 }
 
-.dark {
+/* Starlight sets data-theme="dark" on <html>, not the .dark class */
+[data-theme="dark"] {
   --ds-color-surface: #0f172a;
   --ds-color-surface-fg: #f8fafc;
   --ds-color-border: #1e293b;
@@ -34,13 +35,14 @@
   --ds-sidebar-item-active-fg: #ede9fe;
 }
 
-/* Preview container — isolation so DS styles don't bleed into Starlight */
+/* Preview container — renders on the DS surface so tokens resolve correctly in both modes */
 .ds-preview {
-  border: 1px solid var(--sl-color-gray-5);
+  border: 1px solid var(--ds-color-border);
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-block: 1rem;
-  background: var(--sl-color-bg);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-surface-fg);
 }
 
 .ds-preview + .ds-preview {
