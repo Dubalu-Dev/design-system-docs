@@ -1,0 +1,62 @@
+---
+title: Rating
+description: Calificación con estrellas. Modo display (con estrellas parciales por clipPath) y modo interactivo con hover. Accesible con labels en español.
+---
+
+import RatingExamples from "../../../examples/RatingExamples";
+
+## Importación
+
+```tsx
+import { Rating } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<RatingExamples client:only="react" />
+
+## Props
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `value` | `number` | — | **Requerido.** Calificación actual |
+| `max` | `number` | `5` | Número de estrellas |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Tamaño de las estrellas (16 / 20 / 28 px) |
+| `onChange` | `(value: number) => void` | — | Si se provee, activa el modo interactivo |
+| `onHoverChange` | `(value: number) => void` | — | Tracking de hover (preview antes de confirmar) |
+| `groupLabel` | `(value, max) => string` | — | Aria-label del grupo |
+| `starLabel` | `(star: number) => string` | ES default | Aria-label por estrella |
+| `className` | `string` | — | Clases adicionales |
+
+## Estrellas parciales
+
+En modo display (sin `onChange`), `value` puede ser decimal. El componente usa SVG `clipPath` para renderizar fracciones de estrella con precisión.
+
+```tsx
+<Rating value={4.3} /> // ← 4 estrellas y un 30% de la quinta
+```
+
+## Modo interactivo
+
+Cuando `onChange` está presente, el componente acepta clicks y keyboard (flechas). El valor siempre es entero.
+
+```tsx
+const [rating, setRating] = useState(0);
+<Rating value={rating} onChange={setRating} size="lg" />
+```
+
+## Patrón: reseña de producto
+
+```tsx
+import { Rating } from "@dubalu-dev/design-system";
+
+function ProductReview({ avgRating, count }: { avgRating: number; count: number }) {
+  return (
+    <div className="flex items-center gap-2">
+      <Rating value={avgRating} size="sm" />
+      <span className="text-sm font-medium">{avgRating.toFixed(1)}</span>
+      <span className="text-sm text-muted">({count} reseñas)</span>
+    </div>
+  );
+}
+```

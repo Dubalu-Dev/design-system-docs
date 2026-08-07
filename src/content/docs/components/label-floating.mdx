@@ -1,0 +1,94 @@
+---
+title: Label / FloatingField
+description: Label accesible de Radix. FloatingTextField, FloatingTextAreaField y FloatingNumberField con label flotante en tres variantes visuales.
+---
+
+import LabelFloatingExamples from "../../../examples/LabelFloatingExamples";
+
+## Importación
+
+```tsx
+import { Label } from "@dubalu-dev/design-system";
+import {
+  FloatingTextField,
+  FloatingTextAreaField,
+  FloatingNumberField,
+} from "@dubalu-dev/design-system";
+import type { FloatingLabelVariant } from "@dubalu-dev/design-system";
+```
+
+## Ejemplos
+
+<LabelFloatingExamples client:only="react" />
+
+## Label — Props
+
+`Label` es un wrapper ligero de Radix Label. Acepta todos los atributos de `<label>` incluyendo `htmlFor`.
+
+```tsx
+<Label htmlFor="email">Correo electrónico</Label>
+<input id="email" type="email" />
+```
+
+Cuando el input asociado está `disabled`, el Label aplica `opacity-50` automáticamente vía `:peer-disabled`.
+
+## FloatingField — Props comunes
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | — | **Requerido.** Label que flota al enfocar |
+| `variant` | `"outlined" \| "filled" \| "standard"` | `"outlined"` | Estilo visual del campo |
+| `error` | `string` | — | Mensaje de error (pinta el borde en rojo) |
+
+Cada componente extiende los atributos nativos del elemento subyacente (`<input>`, `<textarea>`).
+
+### FloatingNumberField — Props extra
+
+| Prop | Tipo | Descripción |
+|---|---|---|
+| `min` | `number` | Valor mínimo |
+| `max` | `number` | Valor máximo |
+| `step` | `number` | Incremento |
+
+## Variantes visuales
+
+| Variante | Descripción |
+|---|---|
+| `outlined` | Borde completo, label escala y sube al enfocar |
+| `filled` | Fondo gris claro, solo borde inferior |
+| `standard` | Solo borde inferior, estilo Material Design |
+
+## Label flotante — cómo funciona
+
+El truco es `placeholder=" "` (espacio) en el `<input>`. El label se posiciona sobre el campo con CSS; cuando `:placeholder-shown` es falso (campo con contenido) o `:focus`, el label flota arriba via `transform: scale + translateY`.
+
+## Cuándo usar FloatingField vs TextField
+
+| | `TextField` | `FloatingTextField` |
+|---|---|---|
+| Label visible siempre | ✅ Encima del campo | Flotante (doble rol) |
+| Espacio vertical | Más (label separado) | Menos (label dentro) |
+| Uso típico | Formularios extensos | Formularios compactos, mobile |
+
+## Patrón: formulario de login
+
+```tsx
+import { FloatingTextField } from "@dubalu-dev/design-system";
+
+function LoginForm() {
+  return (
+    <form className="space-y-4 w-full max-w-sm">
+      <FloatingTextField
+        label="Correo electrónico"
+        type="email"
+        autoComplete="email"
+      />
+      <FloatingTextField
+        label="Contraseña"
+        type="password"
+        autoComplete="current-password"
+      />
+    </form>
+  );
+}
+```
