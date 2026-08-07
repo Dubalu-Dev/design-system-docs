@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
 /*
   Scan DS dist for Tailwind class names so they aren't purged.
