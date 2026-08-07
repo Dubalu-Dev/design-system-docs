@@ -15,11 +15,6 @@ export default defineConfig({
     starlight({
       title: "@dubalu-dev/design-system",
       description: "Documentación oficial del design system de Dubalu.",
-      logo: {
-        light: "./src/assets/logo-light.svg",
-        dark: "./src/assets/logo-dark.svg",
-        replacesTitle: false,
-      },
       social: [
         {
           icon: "github",
