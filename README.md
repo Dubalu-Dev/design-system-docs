@@ -8,7 +8,7 @@ Documentación oficial de [`@dubalu-dev/design-system`](https://github.com/Dubal
 
 ## ¿Qué es este repositorio?
 
-`design-system-docs` aloja el sitio de documentación del design system compartido entre los proyectos de Dubalu (TvNotas, EquipoStars, LadyMultitask). Aquí viven las guías de instalación, la referencia de componentes y los ejemplos interactivos.
+`design-system-docs` aloja el sitio de documentación del design system de Dubalu. Aquí viven las guías de instalación, la referencia de componentes y los ejemplos interactivos.
 
 La librería en sí vive en [`dubalu-libs/packages/design-system`](https://github.com/Dubalu-Dev/dubalu-libs/tree/main/packages/design-system). Este repo solo contiene la documentación.
 
