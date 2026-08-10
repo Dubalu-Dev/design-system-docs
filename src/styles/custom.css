@@ -12,13 +12,48 @@
   These mirror the variables defined in the DS source theme.
 */
 :root {
+  /* Surface */
   --ds-color-surface: #ffffff;
   --ds-color-surface-fg: #0f172a;
   --ds-color-border: #e2e8f0;
+  --ds-color-muted: #64748b;
   --ds-radius-base: 0.5rem;
+
+  /* Primary — violet */
   --ds-color-primary: #6d28d9;
   --ds-color-primary-fg: #ffffff;
-  --ds-color-muted: #64748b;
+
+  /* Secondary — violet claro */
+  --ds-color-secondary: #ede9fe;
+  --ds-color-secondary-fg: #5b21b6;
+
+  /* Brand */
+  --ds-color-brand: #6d28d9;
+  --ds-color-brand-fg: #ffffff;
+
+  /* Semantic — info (blue) */
+  --ds-color-info: #2563eb;
+  --ds-color-info-subtle: #eff6ff;
+
+  /* Semantic — success (green) */
+  --ds-color-success: #16a34a;
+  --ds-color-success-subtle: #f0fdf4;
+
+  /* Semantic — warning (amber) */
+  --ds-color-warning: #d97706;
+  --ds-color-warning-subtle: #fffbeb;
+
+  /* Semantic — error (red) */
+  --ds-color-error: #dc2626;
+  --ds-color-error-subtle: #fef2f2;
+
+  /* Destructive (alias de error para AlertDialog) */
+  --ds-color-destructive: #dc2626;
+  --ds-color-destructive-fg: #ffffff;
+
+  /* Shadows */
+  --ds-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ds-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
   /* Sidebar tokens */
   --ds-sidebar-width: 16rem;
@@ -32,6 +67,22 @@
   --ds-color-surface-fg: #f8fafc;
   --ds-color-border: #1e293b;
   --ds-color-muted: #94a3b8;
+
+  --ds-color-secondary: #2e1065;
+  --ds-color-secondary-fg: #ede9fe;
+
+  --ds-color-info: #60a5fa;
+  --ds-color-info-subtle: #1e3a5f;
+
+  --ds-color-success: #4ade80;
+  --ds-color-success-subtle: #14532d;
+
+  --ds-color-warning: #fbbf24;
+  --ds-color-warning-subtle: #451a03;
+
+  --ds-color-error: #f87171;
+  --ds-color-error-subtle: #450a0a;
+
   --ds-sidebar-item-active-bg: #2e1065;
   --ds-sidebar-item-active-fg: #ede9fe;
 }
