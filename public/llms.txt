@@ -1,0 +1,66 @@
+# @dubalu-dev/design-system — llms.txt
+
+> Guía de acceso para agentes de IA. Sigue el estándar propuesto en https://llmstxt.org
+
+## Descripción
+
+`@dubalu-dev/design-system` es una librería de componentes React compartida entre los proyectos de Dubalu.
+Construida con React 19, Tailwind CSS 4 y Radix UI. Publicada en GitHub Packages bajo `@dubalu-dev/design-system`.
+
+- **Repo fuente:** https://github.com/Dubalu-Dev/dubalu-libs/tree/main/packages/design-system
+- **Sitio de documentación:** https://dubalu-dev.github.io/design-system-docs
+
+## Cómo consumir esta documentación
+
+Cada componente tiene un archivo MDX en:
+```
+https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/<slug>.mdx
+```
+
+Formato de cada archivo:
+- **Frontmatter YAML:** `title`, `description`
+- **Tabla de props:** nombre, tipo TypeScript, default, requerido, descripción
+- **Ejemplos tsx:** bloques de código listos para copiar
+- **Anatomía ASCII:** diagrama de la estructura del componente
+- **Patrones de integración:** Next.js, `asChild`, composición
+
+## Guía de instalación
+
+```
+https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/guides/installation.mdx
+```
+
+## Componentes
+
+| Componente | Descripción | Raw MDX |
+|---|---|---|
+| Accordion | Lista de paneles colapsables. Soporta tipo single (uno abierto a la vez) y multiple (varios simultáneos). | [accordion.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/accordion.mdx) |
+| AlertDialog | Diálogo de confirmación bloqueante. A diferencia de Modal, el foco no puede escapar hasta que el usuario responde. Usar para acciones destructivas o irreversibles. | [alert-dialog.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/alert-dialog.mdx) |
+| Alert | Bandas de notificación con tono semántico (info, success, warning, error). Soporta título, cuerpo y botón de cierre opcional. | [alert.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/alert.mdx) |
+| Avatar | Imagen de perfil circular con fallback automático a iniciales. Soporta tamaño, ring de estado activo y stack de avatares. | [avatar.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/avatar.mdx) |
+| Badge | Etiqueta compacta para estados, categorías y contadores. Soporta 7 tones semánticos. | [badge.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/badge.mdx) |
+| Button | Componente de acción principal. Soporta 6 variantes, 3 tamaños y renderizado como elemento arbitrario vía asChild. | [button.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/button.mdx) |
+| Card | Contenedor con borde y fondo de superficie. Soporta modo interactivo para tarjetas seleccionables o clicables. | [card.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/card.mdx) |
+| Checkbox / Switch | Controles booleanos. Ambos tienen variante standalone y variante Field (con label y descripción integrados). | [checkbox-switch.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/checkbox-switch.mdx) |
+| Collapsible | Toggle de expand/collapse para una sección opcional. Más liviano que Accordion cuando solo hay un ítem. | [collapsible.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/collapsible.mdx) |
+| DataTable | Tabla de datos responsiva. En desktop muestra tabla tradicional; en mobile cambia a layout de cards por fila. | [data-table.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/data-table.mdx) |
+| Datepicker | Selector de fecha con calendario emergente. Basado en react-day-picker + Popover. Soporta restricción de rango y formato personalizado. | [datepicker.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/datepicker.mdx) |
+| Drawer | Panel deslizante desde cualquier borde. Ideal para filtros, detalles y formularios secundarios sin abandonar el contexto actual. | [drawer.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/drawer.mdx) |
+| DropdownMenu | Menú contextual flotante con soporte de items, separadores, labels, checkboxes y radio groups. | [dropdown-menu.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/dropdown-menu.mdx) |
+| EmptyState | Placeholder para listas o secciones sin datos. Acepta un ícono, título, descripción y CTA opcional como ReactNode. | [empty-state.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/empty-state.mdx) |
+| Label / FloatingField | Label accesible de Radix. FloatingTextField, FloatingTextAreaField y FloatingNumberField con label flotante en tres variantes visuales. | [label-floating.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/label-floating.mdx) |
+| Modal | Diálogo centrado bloqueante. Compuesto por Modal, ModalTrigger, ModalContent y ModalFooter sobre Radix Dialog. | [modal.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/modal.mdx) |
+| Pagination | Navegación entre páginas con compresión automática de ellipsis. Completamente controlado y accesible. | [pagination.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/pagination.mdx) |
+| Progress | Barra de progreso animada. Acepta value y max para calcular el porcentaje automáticamente. | [progress.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/progress.mdx) |
+| RadioGroup / NumberField | RadioGroup para selección excluyente con composición flexible. NumberField para inputs numéricos sin flechas nativas. | [radio-number.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/radio-number.mdx) |
+| Rating | Calificación con estrellas. Modo display (con estrellas parciales por clipPath) y modo interactivo con hover. Accesible con labels en español. | [rating.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/rating.mdx) |
+| SectionHeading | Encabezado de sección con borde de acento de color, eyebrow, subtitle y slot de acción. Polimórfico (as prop). | [section-heading.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/section-heading.mdx) |
+| SelectField / NativeSelect | Dos variantes de selector. SelectField usa Radix UI (accesible, estilizable). NativeSelect es el select HTML nativo con estilos consistentes. | [select-field.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/select-field.mdx) |
+| Separator | Línea divisoria horizontal o vertical. Semánticamente un hr accesible o decorativo. | [separator.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/separator.mdx) |
+| Sidebar | Navegación lateral estructurada con header, secciones, ítems con ícono/badge/estado activo, y footer. | [sidebar.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/sidebar.mdx) |
+| Skeleton / Spinner | Dos primitivas de estado de carga. Skeleton para placeholders de contenido. Spinner para operaciones en curso. | [skeleton-spinner.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/skeleton-spinner.mdx) |
+| Table (primitivas) | Componentes de tabla HTML semánticos con estilos base. Úsalos cuando necesitas control total sobre la estructura. Para tablas de datos estándar usa DataTable. | [table-primitives.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/table-primitives.mdx) |
+| Tabs | Navegación por pestañas horizontal o vertical. Compound component sobre Radix UI Tabs. | [tabs.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/tabs.mdx) |
+| TextField / TextAreaField | Campos de texto con label integrado, soporte de íconos y estado de error accesible. | [text-field.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/text-field.mdx) |
+| Toggle / ToggleGroup | Botón biestado (on/off) y grupo de toggles con variantes segmented, pills y group. Soporta selección única y múltiple. | [toggle.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/toggle.mdx) |
+| Tooltip / Popover | Dos patrones de overlay flotante. Tooltip para info contextual breve al hover. Popover para contenido interactivo al click. | [tooltip-popover.mdx](https://raw.githubusercontent.com/Dubalu-Dev/design-system-docs/main/src/content/docs/components/tooltip-popover.mdx) |
