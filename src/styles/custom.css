@@ -8,6 +8,27 @@
 @source "../../node_modules/@dubalu-dev/design-system/dist/**/*.{js,mjs,cjs}";
 
 /*
+  Background image — applied to body; Starlight layers sit on top with slight transparency.
+*/
+body {
+  background-image: url('/design-system-docs/design-system-docs-bg.webp');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+/* Make Starlight layout surfaces slightly transparent so the bg shows through */
+:root {
+  --sl-color-bg: rgba(255, 255, 255, 0.93);
+  --sl-color-bg-sidebar: rgba(248, 250, 252, 0.90);
+}
+
+[data-theme="dark"] {
+  --sl-color-bg: rgba(15, 23, 42, 0.92);
+  --sl-color-bg-sidebar: rgba(2, 6, 23, 0.90);
+}
+
+/*
   DS design tokens — CSS custom properties used by the components.
   These mirror the variables defined in the DS source theme.
 */
@@ -61,7 +82,6 @@
   --ds-sidebar-item-active-fg: #5b21b6;
 }
 
-/* Starlight sets data-theme="dark" on <html>, not the .dark class */
 [data-theme="dark"] {
   --ds-color-surface: #0f172a;
   --ds-color-surface-fg: #f8fafc;
