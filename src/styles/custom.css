@@ -1,82 +1,42 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
-/*
-  Scan DS dist for Tailwind class names so they aren't purged.
-  The DS uses Tailwind utility classes in its compiled output.
-*/
 @source "../../node_modules/@dubalu-dev/design-system/dist/**/*.{js,mjs,cjs}";
 
-/*
-  Background image — applied to body; Starlight layers sit on top with slight transparency.
-*/
-body {
-  background-image: url('/design-system-docs/design-system-docs-bg.webp');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-}
-
-/* Make Starlight layout surfaces slightly transparent so the bg shows through */
 :root {
-  --sl-color-bg: rgba(255, 255, 255, 0.93);
-  --sl-color-bg-sidebar: rgba(248, 250, 252, 0.90);
-}
-
-[data-theme="dark"] {
-  --sl-color-bg: rgba(15, 23, 42, 0.92);
-  --sl-color-bg-sidebar: rgba(2, 6, 23, 0.90);
-}
-
-/*
-  DS design tokens — CSS custom properties used by the components.
-  These mirror the variables defined in the DS source theme.
-*/
-:root {
-  /* Surface */
   --ds-color-surface: #ffffff;
   --ds-color-surface-fg: #0f172a;
   --ds-color-border: #e2e8f0;
   --ds-color-muted: #64748b;
   --ds-radius-base: 0.5rem;
 
-  /* Primary — violet */
   --ds-color-primary: #6d28d9;
   --ds-color-primary-fg: #ffffff;
 
-  /* Secondary — violet claro */
   --ds-color-secondary: #ede9fe;
   --ds-color-secondary-fg: #5b21b6;
 
-  /* Brand */
   --ds-color-brand: #6d28d9;
   --ds-color-brand-fg: #ffffff;
 
-  /* Semantic — info (blue) */
   --ds-color-info: #2563eb;
   --ds-color-info-subtle: #eff6ff;
 
-  /* Semantic — success (green) */
   --ds-color-success: #16a34a;
   --ds-color-success-subtle: #f0fdf4;
 
-  /* Semantic — warning (amber) */
   --ds-color-warning: #d97706;
   --ds-color-warning-subtle: #fffbeb;
 
-  /* Semantic — error (red) */
   --ds-color-error: #dc2626;
   --ds-color-error-subtle: #fef2f2;
 
-  /* Destructive (alias de error para AlertDialog) */
   --ds-color-destructive: #dc2626;
   --ds-color-destructive-fg: #ffffff;
 
-  /* Shadows */
   --ds-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --ds-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-  /* Sidebar tokens */
   --ds-sidebar-width: 16rem;
   --ds-sidebar-item-active-bg: #ede9fe;
   --ds-sidebar-item-active-fg: #5b21b6;
@@ -107,7 +67,6 @@ body {
   --ds-sidebar-item-active-fg: #ede9fe;
 }
 
-/* Preview container — renders on the DS surface so tokens resolve correctly in both modes */
 .ds-preview {
   border: 1px solid var(--ds-color-border);
   border-radius: 0.5rem;
