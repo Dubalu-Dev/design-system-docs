@@ -1,10 +1,23 @@
 ---
 title: Design System — @dubalu-dev
-description: Librería de componentes UI compartida entre los proyectos Dubalu.
+description: Librería de componentes UI compartida entre los proyectos de Dubalu.
 template: splash
+head:
+  - tag: style
+    content: |
+      [data-theme="dark"] body {
+        background-image: url('/design-system-docs/design-system-docs-bg.webp');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+      }
+      [data-theme="dark"] {
+        --sl-color-bg: rgba(15, 23, 42, 0.92);
+        --sl-color-bg-sidebar: rgba(2, 6, 23, 0.90);
+      }
 hero:
   title: "@dubalu-dev/design-system"
-  tagline: Componentes React reutilizables, accesibles y tipados para TvNotas, EquipoStars y LadyMultitask.
+  tagline: Componentes React reutilizables, accesibles y tipados para los proyectos de Dubalu.
   actions:
     - text: Instalación
       link: /design-system-docs/guides/installation/
