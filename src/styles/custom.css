@@ -85,10 +85,23 @@
   .sl-markdown-content (including deeply nested flex-row children).
   This breaks flex-row layouts in example islands — the first child
   gets no margin but siblings do, creating vertical misalignment.
-  Reset it for all children of flex containers inside example islands.
+  Covers flex, inline-flex (TabsList, ToggleGroup group/pills) and
+  inline-grid (ToggleGroup segmented).
 */
-.sl-markdown-content astro-island .flex > * {
+.sl-markdown-content astro-island .flex > *,
+.sl-markdown-content astro-island .inline-flex > *,
+.sl-markdown-content astro-island .inline-grid > * {
   margin-top: 0 !important;
+}
+
+/* Rating tokens — not hardcoded in the component, must be provided by the consumer */
+:root {
+  --ds-color-rating: #f59e0b;
+  --ds-color-rating-empty: #d1d5db;
+}
+[data-theme="dark"] {
+  --ds-color-rating: #fbbf24;
+  --ds-color-rating-empty: #374151;
 }
 
 /*
