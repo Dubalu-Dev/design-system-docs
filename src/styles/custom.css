@@ -79,3 +79,26 @@
 .ds-preview + .ds-preview {
   margin-top: 0.5rem;
 }
+
+/*
+  Starlight adds margin-top to elements that follow siblings inside
+  .sl-markdown-content (including deeply nested flex-row children).
+  This breaks flex-row layouts in example islands — the first child
+  gets no margin but siblings do, creating vertical misalignment.
+  Reset it for all children of flex containers inside example islands.
+*/
+.sl-markdown-content astro-island .flex > * {
+  margin-top: 0 !important;
+}
+
+/*
+  Tabs dark mode: override hardcoded Tailwind colors (bg-gray-100 / bg-white)
+  in TabsList and TabsTrigger[data-state=active] until the DS patch ships.
+*/
+[data-theme="dark"] [role="tablist"] {
+  background-color: var(--ds-color-border) !important;
+}
+[data-theme="dark"] [role="tab"][data-state="active"] {
+  background-color: var(--ds-color-surface) !important;
+  color: var(--ds-color-surface-fg) !important;
+}
