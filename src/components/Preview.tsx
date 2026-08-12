@@ -13,7 +13,7 @@ export function Preview({ children, label }: PreviewProps) {
           {label}
         </p>
       )}
-      <div className="flex flex-wrap items-center gap-3 [&>*]:!mt-0">{children}</div>
+      <div className="not-content flex flex-wrap items-center gap-3 [&>*]:!mt-0">{children}</div>
     </div>
   );
 }
